@@ -84,8 +84,8 @@ pub(all) enum StatusCode {
   LoopDetected
   NotExtended
   NetworkAuthenticationRequired
-} derive (Eq, Show)
-  
+} derive(Eq, Show)
+
 ///|
 /// Converts a `StatusCode` enum variant to its corresponding numeric HTTP status
 /// code value.
@@ -96,7 +96,7 @@ pub(all) enum StatusCode {
 ///
 /// Returns an unsigned integer representing the HTTP status code (between 100
 /// and 511).
-pub fn to_statuscode(self: StatusCode) -> UInt {
+pub fn to_statuscode(self : StatusCode) -> UInt {
   match self {
     // 1xx
     StatusCode::Continue => 100
@@ -188,7 +188,6 @@ test "to_statuscode/errors" {
   inspect!(to_statuscode(BadGateway), content="502")
 }
 
-
 ///|
 /// Represents an error that occurs when an unrecognized HTTP status code is
 /// encountered.
@@ -215,7 +214,9 @@ type! UnknownStatusCode UInt
 /// * `Err(UnknownStatusCode)` if the given code is not a recognized HTTP status
 /// code
 ///
-pub fn StatusCode::from_code(code: UInt) -> Result[StatusCode, UnknownStatusCode] {
+pub fn StatusCode::from_code(
+  code : UInt
+) -> Result[StatusCode, UnknownStatusCode] {
   match code {
     // 1xx
     100 => Ok(Continue)
@@ -288,7 +289,6 @@ pub fn StatusCode::from_code(code: UInt) -> Result[StatusCode, UnknownStatusCode
   }
 }
 
-
 ///|
 /// Converts a numeric HTTP status code to a `StatusCode` enum value. Raises an
 /// error if the code is not recognized.
@@ -303,7 +303,9 @@ pub fn StatusCode::from_code(code: UInt) -> Result[StatusCode, UnknownStatusCode
 /// HTTP status code.
 ///
 /// ```
-pub fn StatusCode::from_code_or_error(code: UInt) -> StatusCode!UnknownStatusCode {
+pub fn StatusCode::from_code_or_error(
+  code : UInt
+) -> StatusCode!UnknownStatusCode {
   let result = StatusCode::from_code(code)
   result.unwrap_or_error!()
 }
