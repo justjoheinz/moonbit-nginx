@@ -13,9 +13,5 @@ pub fn handle(
   _request : @types.IncomingRequest,
   _response_out : @types.ResponseOutparam
 ) -> Unit {
-  let response = match _request.path_with_query() {
-    None | Some("/") => @util.make_response("Hello, World")
-    _ => @util.make_response("Not Found", status_code = NotFound, content_type = "application/json")
-  }
-  _response_out.set(response |> Ok)
+  @util.handle(_request, _response_out)
 }
