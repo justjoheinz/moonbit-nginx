@@ -1,0 +1,1 @@
+{ "import": [{ "path" : "justjoheinz/moonbit-nginx/ffi", "alias" : "ffi" }, { "path" : "justjoheinz/moonbit-nginx/interface/wasi/io/error", "alias" : "error" }, { "path" : "justjoheinz/moonbit-nginx/interface/wasi/io/poll", "alias" : "poll" }] }

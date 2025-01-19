@@ -1,0 +1,15 @@
+{
+  "applications": {
+    "demo" : {
+      "type": "wasm-wasi-component",
+      "component" : "/Users/markusklink/Projects/moon/moonbit-nginx/target/wasm/release/build/gen/gen.wasm"
+    }
+  },
+  "listeners": {
+    "*:8091": {
+      "pass": "applications/demo"
+    }
+  },
+  "routes": [
+  ]
+}

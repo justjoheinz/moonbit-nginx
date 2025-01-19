@@ -1,0 +1,11 @@
+
+{
+      "link": {
+            "wasm": {
+                  "exports": ["cabi_realloc:cabi_realloc", "wasmExportHandle:wasi:http/incoming-handler@0.2.0#handle"],
+                  "export-memory-name": "memory",
+                  "heap-start-address": 16
+            }
+      }
+      ,"import": [{ "path" : "justjoheinz/moonbit-nginx/ffi", "alias" : "ffi" }, { "path" : "justjoheinz/moonbit-nginx/gen/interface/wasi/http/incomingHandler", "alias" : "incomingHandler" }, { "path" : "justjoheinz/moonbit-nginx/interface/wasi/http/types", "alias" : "types" }]
+}
