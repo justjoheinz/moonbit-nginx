@@ -40,10 +40,13 @@ make build
 make component
 ```
 
-When that succeeded you can configure nginx unit:
+When that succeeded you can configure nginx unit (unit.config.json contains a hard coded path to your WASM file, please adopt it accordingly):
 
 ```sh 
+# update the configuration
 cat unit.conf.json | http PUT :9090/config
+# restart the app
+http :9090/control/applications/demo/restart
 ```
 
 and when that is done you can finally do:
@@ -59,5 +62,10 @@ Transfer-Encoding: chunked
 Hello, World
 ```
 
+The last steps can also be achieved by issuing:
+
+```sh 
+make restart-unit
+```
 
 

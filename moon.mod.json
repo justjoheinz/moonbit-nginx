@@ -1,1 +1,5 @@
-{ "name": "justjoheinz/moonbit-nginx" }
+{ "name": "justjoheinz/moonbit-nginx" ,
+  "deps" : {
+    "gmlewis/base64" : "0.13.0"
+  }
+}

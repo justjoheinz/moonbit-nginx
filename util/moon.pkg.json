@@ -1,6 +1,7 @@
 {
   "import" : [
     "justjoheinz/moonbit-nginx/interface/wasi/http/types",
-    "justjoheinz/moonbit-nginx/interface/wasi/io/streams"
+    "justjoheinz/moonbit-nginx/interface/wasi/io/streams",
+    "gmlewis/base64"
   ]
 }

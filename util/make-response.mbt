@@ -1,3 +1,13 @@
+///| convert an fixed array of bytes which represent UTF-16 characters
+/// to an fixed array of bytes which represent ascii characters 
+fn to_ascii(utf16 : FixedArray[Byte]) -> FixedArray[Byte] {
+  let ascii : Array[Byte] = Array::new()
+  for i = 0; i < utf16.length() / 2; i = i + 1 {
+    ascii.push(utf16[i * 2])
+  }
+  FixedArray::from_array(ascii)
+}
+
 ///|
 trait ToBody {
   to_body(Self) -> FixedArray[Byte]
@@ -17,30 +27,22 @@ pub impl ToBody for Bytes with to_body(self : Bytes) -> FixedArray[Byte] {
 
 ///|
 pub impl ToBody for String with to_body(self : String) -> FixedArray[Byte] {
-  self.to_bytes().to_body()
+  @base64.str2bytes(self).to_fixedarray()
 }
 
 ///|
-/// Converts a JSON-serializable value to a byte array representation.
-///
-/// Parameters:
-///
-/// * `json` : A value of any type that implements the `ToJson` trait.
-///
-/// Returns a fixed-size array of bytes containing the JSON string representation
-/// of the input value.
-pub fn json_to_bytes[A : ToJson](json : A) -> FixedArray[Byte] {
-  json.to_json().to_string().to_body()
+pub impl ToBody for &ToJson with to_body(self : &ToJson) -> FixedArray[Byte] {
+  @base64.str2bytes(self.to_json().stringify()).to_fixedarray()
 }
 
 ///| `make_response` makes a new `OutgoingResponse`.
 pub fn make_response[A : ToBody](
   body : A,
-  content_type~ : String = "text/plain",
-  status_code~ : StatusCode = Ok
+  content_type~ : Bytes = b"text/plain",
+  status_code~ : StatusCode = StatusCode::Ok
 ) -> @types.OutgoingResponse {
   let fields = @types.Fields::from_list([
-    ("Content-Type", content_type.to_body()),
+    ("Content-Type", content_type.to_fixedarray()),
   ]).unwrap()
   let response = @types.OutgoingResponse::outgoing_response(fields)
   response
