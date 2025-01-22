@@ -1,9 +1,13 @@
-.PHONY: build check regenerate component restart-unit clean
+.PHONY: update-libs build check regenerate component restart-unit clean
 
 WASM?="./target/wasm/release/build/gen/gen.wasm"
 IGNORE?=--ignore-stub
 
-build:
+update-libs:
+	@echo "Updating the libraries"
+	moon install
+
+build: update-libs
 	@echo "Building the project"
 	moon build --target wasm 
 

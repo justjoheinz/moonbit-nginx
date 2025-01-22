@@ -1,13 +1,3 @@
-///| convert an fixed array of bytes which represent UTF-16 characters
-/// to an fixed array of bytes which represent ascii characters 
-fn to_ascii(utf16 : FixedArray[Byte]) -> FixedArray[Byte] {
-  let ascii : Array[Byte] = Array::new()
-  for i = 0; i < utf16.length() / 2; i = i + 1 {
-    ascii.push(utf16[i * 2])
-  }
-  FixedArray::from_array(ascii)
-}
-
 ///|
 trait ToBody {
   to_body(Self) -> FixedArray[Byte]

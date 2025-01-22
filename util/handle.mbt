@@ -4,6 +4,7 @@ pub struct Person {
   age : Int
 } derive(Eq, Show, ToJson)
 
+
 ///|
 pub fn handle(
   _request : @types.IncomingRequest,
@@ -11,11 +12,15 @@ pub fn handle(
 ) -> Unit {
   let response = match _request.path_with_query() {
     None | Some("/") => make_response("Bon jour!")
+
     Some("/json") =>
       make_response(
         Person::{ name: "Alice", age: 42 } as &ToJson,
         content_type=b"application/json",
       )
+    Some("/query") => 
+      make_response(_request.path_with_query().unwrap())
+
     _ => make_response(b"Not Found", status_code=NotFound)
   }
   _response_out.set(response |> Ok)
