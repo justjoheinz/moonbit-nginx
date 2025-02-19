@@ -168,6 +168,7 @@ pub fn to_statuscode(self : StatusCode) -> UInt {
   }
 }
 
+///|
 test "to_statuscode/1xx" {
   inspect!(to_statuscode(Continue), content="100")
   inspect!(to_statuscode(SwitchingProtocols), content="101")
@@ -175,12 +176,14 @@ test "to_statuscode/1xx" {
   inspect!(to_statuscode(EarlyHints), content="103")
 }
 
+///|
 test "to_statuscode/2xx" {
   inspect!(to_statuscode(Ok), content="200")
   inspect!(to_statuscode(Created), content="201")
   inspect!(to_statuscode(NoContent), content="204")
 }
 
+///|
 test "to_statuscode/errors" {
   inspect!(to_statuscode(BadRequest), content="400")
   inspect!(to_statuscode(NotFound), content="404")
@@ -310,16 +313,19 @@ pub fn StatusCode::from_code_or_error(
   result.unwrap_or_error!()
 }
 
+///|
 test "StatusCode::from_code_or_error/success" {
   inspect!(StatusCode::from_code_or_error!(200), content="Ok")
   inspect!(StatusCode::from_code_or_error!(404), content="NotFound")
   inspect!(StatusCode::from_code_or_error!(500), content="InternalServerError")
 }
 
+///|
 test "panic StatusCode::from_code_or_error/invalid" {
   ignore(StatusCode::from_code_or_error!(999))
 }
 
+///|
 test "StatusCode::from_code_or_error/boundary" {
   inspect!(StatusCode::from_code_or_error!(100), content="Continue")
   inspect!(
