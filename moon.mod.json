@@ -1,7 +1,7 @@
 {
   "name": "justjoheinz/moonbit-nginx",
   "deps": {
-    "gmlewis/base64": "0.13.0",
-    "yj-qin/regexp": "0.3.3"
+    "gmlewis/base64": "0.14.1",
+    "yj-qin/regexp": "0.3.4"
   }
 }
